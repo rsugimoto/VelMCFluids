@@ -1,0 +1,40 @@
+{
+    "binary": "velocity_fluids_3d",
+    "output_dir": "../results/results_buoyancy_3d_logo/raw",
+    "smoke_source_field": "../configs/logo.scalar",
+    "domain_type": "UnboundedDomain",
+    "advection_mode": "RK3",
+    "num_volume_samples_direct": 1e5,
+    "num_pseudo_boundary_samples_direct": 1e5,
+    "num_winding_samples": 0,
+    "num_init_winding_samples": 1024,
+    "enable_inplace_advection": false,
+    "enable_vpl": false,
+    "grid_res": [
+        288,
+        128,
+        128
+    ],
+    "domain_size": [
+        2.88,
+        1.28,
+        1.28
+    ],
+    "time_steps": 300,
+    "dt": 0.05,
+    "dGdx_regularization": 1e-5,
+    "buoyancy_alpha": 1,
+    "buoyancy_beta": 5,
+    "buoyancy_gravity": [
+        0,
+        -1,
+        0
+    ],
+    "velocity_diffusion_coefficient": 0.00,
+    "concentration_diffusion_coefficient": 0.000,
+    "concentration_rate": 5,
+    "temperature_diffusion_coefficient": 0.001,
+    "temperature_rate": 1,
+    "scene_number": 1,
+    "enable_antithetic_sampling": true
+}

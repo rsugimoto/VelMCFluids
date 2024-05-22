@@ -1,0 +1,41 @@
+{
+    "binary": "velocity_fluids_divfree_advection",
+    "output_dir": "../results/results_circle_karman_0001/raw",
+    "obj_file": "../objs/unit_circle.obj",
+    "domain_type": "UnboundedDomain",
+    "advection_mode": "RK3",
+    "path_length": 4,
+    "num_path_samples": 5e5,
+    "num_volume_samples_indirect": 10,
+    "num_pseudo_boundary_samples_indirect": 10,
+    "num_volume_samples_direct": 5e5,
+    "num_pseudo_boundary_samples_direct": 5e5,
+    "num_winding_samples": 1,
+    "num_init_winding_samples": 1024,
+    "enable_inplace_advection": false,
+    "enable_vpl": true,
+    "grid_res": [
+        256,
+        128
+    ],
+    "domain_size": [
+        4.0,
+        2.0
+    ],
+    "time_steps": 1000,
+    "dt": 0.02,
+    "obstacle_shift": [
+        -1.5,
+        0.0
+    ],
+    "obstacle_scale": 0.125,
+    "background_velocity": 1.0,
+    "solid_velocity": [
+        0.0,
+        0.0
+    ],
+    "dGdx_regularization": 1e-5,
+    "velocity_diffusion_coefficient": 0.001,
+    "scene_number": 2,
+    "enable_antithetic_sampling": true
+}
