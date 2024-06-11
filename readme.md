@@ -1,5 +1,5 @@
 # VelMCFluids
-This is a reference OptiX implementation of our SIGGRAPH North America 2024 paper, ["Velocity-Based Monte Carlo Fluids"](https://https://rsugimoto.net/VelMCFluidsProject/), Sugimoto, Batty, and Hachisuka. 2024.
+This is a reference OptiX implementation of our SIGGRAPH North America 2024 paper, ["Velocity-Based Monte Carlo Fluids"](https://rsugimoto.net/VelMCFluidsProject/), Sugimoto, Batty, and Hachisuka. 2024.
 This repository contains the simulation program for all examples shown in the paper. Note this repository does not contain all the visualization scripts to produce the figures and does not contain other methods (e.g., Baty et al. 2007 or Rioux-Lavoie and Sugimoto et al. 2022) discussed in the paper.
 
 ## Directory Structure
