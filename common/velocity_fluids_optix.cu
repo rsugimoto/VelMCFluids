@@ -166,7 +166,7 @@ __device__ owl::vec_t<float, Dim> project(
             const owl::vec_t<float, Dim> vel_x = get_velocity(point_x.position);
 
             // for length n + 0.5 contributions
-            float multiplier_n_5 = source_inv_pdf * si_x * dot(source_normal, source_vel - vel_x);
+            float multiplier_n_5 = -source_inv_pdf * si_x * dot(source_normal, source_vel - vel_x);
             // for length n + 1  contributions
             float multiplier_n =
                 source_inv_pdf * si_x * 2.f * dot(source_normal, source_terms + source_vel - solid_velocity);
@@ -329,7 +329,7 @@ __device__ void project_vpl_construct(
         const owl::vec_t<float, Dim> vel_x = get_velocity(point_x.position);
 
         // for length n + 0.5 contributions
-        float multiplier_n_5 = source_inv_pdf * si_x * dot(source_normal, source_vel - vel_x);
+        float multiplier_n_5 = -source_inv_pdf * si_x * dot(source_normal, source_vel - vel_x);
         // for length n + 1  contributions
         float multiplier_n =
             source_inv_pdf * si_x * 2.f * dot(source_normal, source_terms + source_vel - solid_velocity);
