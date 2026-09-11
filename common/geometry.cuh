@@ -352,10 +352,7 @@ __device__ RayIntersectionBoundarySample<Dim> line_intersection_boundary_sample(
     owl::traceRay(acc_structure, ray, prd);
     ray.direction = -ray.direction;
     owl::traceRay(acc_structure, ray, prd);
-    return {
-        BoundaryPoint<Dim>{owl::cast_dim<Dim>(owl::vec2f(prd.position.x, prd.position.y)), prd.prim_id},
-        prd.num_intersections
-    };
+    return {BoundaryPoint<Dim>{owl::cast_dim<Dim>(prd.position), prd.prim_id}, prd.num_intersections};
 }
 
 // This is callable from OptiX programs only
@@ -397,7 +394,7 @@ __device__ BoundaryPoint<Dim> closest_boundary_point(
         ray.direction = -ray.direction;
         owl::traceRay(acc_structure, ray, prd);
     }
-    return {owl::cast_dim<Dim>(owl::vec2f(prd.position.x, prd.position.y)), prd.prim_id};
+    return {owl::cast_dim<Dim>(prd.position), prd.prim_id};
 }
 
 template <int Dim>
