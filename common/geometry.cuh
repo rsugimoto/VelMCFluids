@@ -196,7 +196,7 @@ inline __device__ BoundaryPoint<2> closest_point_in_mesh(Mesh &mesh, const owl::
 /* Implementation of the functions declared above */
 
 template <> inline __device__ owl::vec3f uniform_direction_sample<3>(utils::randState_t &rand_state) {
-    float phi = 2.f * M_PIf32 * utils::rand_uniform(rand_state);
+    float phi = 2.f * M_PIf * utils::rand_uniform(rand_state);
     float z = 2.f * utils::rand_uniform(rand_state) - 1.f;
     float x = cosf(phi) * sqrtf(1.f - z * z);
     float y = sinf(phi) * sqrtf(1.f - z * z);
@@ -204,7 +204,7 @@ template <> inline __device__ owl::vec3f uniform_direction_sample<3>(utils::rand
 }
 
 template <> inline __device__ owl::vec2f uniform_direction_sample<2>(utils::randState_t &rand_state) {
-    float theta = 2.f * M_PIf32 * utils::rand_uniform(rand_state);
+    float theta = 2.f * M_PIf * utils::rand_uniform(rand_state);
     float x = cosf(theta);
     float y = sinf(theta);
     return {x, y};
@@ -214,7 +214,7 @@ template <>
 inline __device__ VolumeSample<3> strongly_singular_ball_sample<3>(float radius, utils::randState_t &rand_state) {
     float r = radius * utils::rand_uniform(rand_state);
     const owl::vec3f dir = uniform_direction_sample<3>(rand_state);
-    float inv_pdf = 4.f * M_PIf32 * radius * r * r;
+    float inv_pdf = 4.f * M_PIf * radius * r * r;
     return {r * dir, inv_pdf};
 };
 
@@ -222,7 +222,7 @@ template <>
 inline __device__ VolumeSample<2> strongly_singular_ball_sample<2>(float radius, utils::randState_t &rand_state) {
     float r = radius * utils::rand_uniform(rand_state);
     const owl::vec2f dir = uniform_direction_sample<2>(rand_state);
-    float inv_pdf = 2.f * M_PIf32 * r * radius;
+    float inv_pdf = 2.f * M_PIf * r * radius;
     return {r * dir, inv_pdf};
 }
 
@@ -284,13 +284,13 @@ __device__ BoundarySample<Dim> cdf_boundary_sample(const Mesh &mesh, utils::rand
 
 template <int Dim> inline __device__ owl::vec_t<float, Dim> uniform_sample_dir(utils::randState_t &rand_state);
 template <> inline __device__ owl::vec2f uniform_sample_dir<2>(utils::randState_t &rand_state) {
-    float phi = 2.f * M_PIf32 * utils::rand_uniform(rand_state);
+    float phi = 2.f * M_PIf * utils::rand_uniform(rand_state);
     return owl::vec2f(cosf(phi), sinf(phi));
 }
 template <> inline __device__ owl::vec3f uniform_sample_dir<3>(utils::randState_t &rand_state) {
     float z = 1.f - 2.f * utils::rand_uniform(rand_state);
     float r = sqrtf(max(1.f - z * z, 0.f));
-    float phi = 2.f * M_PIf32 * utils::rand_uniform(rand_state);
+    float phi = 2.f * M_PIf * utils::rand_uniform(rand_state);
     return owl::vec3f(r * cosf(phi), r * sinf(phi), z);
 }
 
@@ -354,7 +354,8 @@ __device__ RayIntersectionBoundarySample<Dim> line_intersection_boundary_sample(
     owl::traceRay(acc_structure, ray, prd);
     return {
         BoundaryPoint<Dim>{owl::cast_dim<Dim>(owl::vec2f(prd.position.x, prd.position.y)), prd.prim_id},
-        prd.num_intersections};
+        prd.num_intersections
+    };
 }
 
 // This is callable from OptiX programs only

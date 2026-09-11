@@ -20,21 +20,15 @@ All dependencies are included as git submodules or in the `commmon` directory. W
         git clone --recurse-submodules  https://github.com/rsugimoto/VelMCFluids
 
 This repository utilizes the following external libraries.
-- [OWL](https://github.com/owl-project/owl): an OptiX 7 wrapper library.
+- [OWL](https://github.com/NVIDIA/OWL): an OptiX 7/8 wrapper library.
 - [nlohmann/json](https://github.com/nlohmann/json): a header-only C++ JSON parser.
 - [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader): a header-only Wavefront OBJ loader.
 
 ## Requirement
 The program compiles and runs on x86-64 Linux machines with NVIDIA OptiX 7/8 support.
-The program is tested with OptiX SDK versions 7.7.0 and 8.0.0.
 
 ## Compile and Run
-To compile the program, you need to have the NVIDIA OptiX SDK installed.
-Download and install it from https://developer.nvidia.com/designworks/optix/download.
-The code is tested with SDK versions 7.7.0 and 8.0.0.
-Set environment variable `OptiX_INSTALL_DIR` to the SDK directory.
-
-Once OptiX SDK is installed, you can run the standard cmake routine to compile the program:
+You can run the standard cmake routine to compile the program:
 
     mkdir build
     cd build

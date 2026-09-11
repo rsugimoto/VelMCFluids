@@ -104,15 +104,15 @@ __device__ owl::vec3f project(
                 }
             }
         }
-        return owl::vec3f(S_sum.sum.x, S_sum.sum.y, dGdy_sum.sum) / (num_samples * (2 * (2 - 1) * M_PIf32));
+        return owl::vec3f(S_sum.sum.x, S_sum.sum.y, dGdy_sum.sum) / (num_samples * (2 * (2 - 1) * M_PIf));
     };
 
     const auto dGdx = [&](const owl::vec2f &r_vec) -> owl::vec3f {
         float r = owl::length(r_vec);
         r = max(r, dGdx_regularization);
-        owl::vec2f _dGdx = owl::normalize(r_vec) / (r * (2 * (2 - 1) * M_PIf32));
+        owl::vec2f _dGdx = owl::normalize(r_vec) / (r * (2 * (2 - 1) * M_PIf));
         if (!owl::isfinite(_dGdx)) _dGdx = utils::zero<owl::vec2f>();
-        float _G = -1. / (2 * M_PIf32) * log(r);
+        float _G = -1. / (2 * M_PIf) * log(r);
         if (!owl::isfinite(_G)) _G = 0.f;
 
         return owl::vec3f(_dGdx.x, _dGdx.y, _G);
@@ -183,7 +183,8 @@ int main(int argc, char *argv[]) {
             {domain_size[0] / 2, domain_size[1] / 2},
             {domain_size[0] / 2, -domain_size[1] / 2},
             {-domain_size[0] / 2, -domain_size[1] / 2},
-            {-domain_size[0] / 2, domain_size[1] / 2}};
+            {-domain_size[0] / 2, domain_size[1] / 2}
+        };
         for (int l = 0; l < 4; l++) {
             const owl::vec2f &v0 = vertices[l];
             const owl::vec2f &v1 = vertices[(l + 1) % 4];

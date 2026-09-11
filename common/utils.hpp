@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <owl/common/math/vec.h>
 #include <random>
+#include <thrust/swap.h>
 #include <thrust/universal_vector.h>
 
 inline std::ostream &operator<<(std::ostream &os, const std::chrono::time_point<std::chrono::system_clock> &time) {

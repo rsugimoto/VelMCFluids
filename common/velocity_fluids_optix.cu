@@ -91,13 +91,13 @@ __device__ owl::vec_t<float, Dim> project(
                 sum += multiplier * inv_pdf / divisor * (Dim * dot(r_hat, vel_diff) * r_hat - vel_diff);
             }
         }
-        return sum.sum / (num_samples * (2 * (Dim - 1) * M_PIf32));
+        return sum.sum / (num_samples * (2 * (Dim - 1) * M_PIf));
     };
 
     const auto dGdx = [&](const owl::vec_t<float, Dim> &r_vec) -> owl::vec_t<float, Dim> {
         float divisor = Dim == 2 ? owl::length(r_vec) : owl::length2(r_vec);
         divisor = max(divisor, config.dGdx_regularization);
-        owl::vec_t<float, Dim> result = owl::normalize(r_vec) / (divisor * (2 * (Dim - 1) * M_PIf32));
+        owl::vec_t<float, Dim> result = owl::normalize(r_vec) / (divisor * (2 * (Dim - 1) * M_PIf));
         return owl::isfinite(result) ? result : utils::zero<owl::vec_t<float, Dim>>();
     };
 
@@ -268,13 +268,13 @@ __device__ void project_vpl_construct(
                 sum += multiplier * inv_pdf / divisor * (Dim * dot(r_hat, vel_diff) * r_hat - vel_diff);
             }
         }
-        return sum.sum / (config.num_volume_samples_indirect * (2 * (Dim - 1) * M_PIf32));
+        return sum.sum / (config.num_volume_samples_indirect * (2 * (Dim - 1) * M_PIf));
     };
 
     const auto dGdx = [&](const owl::vec_t<float, Dim> &r_vec) -> owl::vec_t<float, Dim> {
         float divisor = Dim == 2 ? owl::length(r_vec) : owl::length2(r_vec);
         divisor = max(divisor, config.dGdx_regularization);
-        owl::vec_t<float, Dim> result = owl::normalize(r_vec) / (divisor * (2 * (Dim - 1) * M_PIf32));
+        owl::vec_t<float, Dim> result = owl::normalize(r_vec) / (divisor * (2 * (Dim - 1) * M_PIf));
         return owl::isfinite(result) ? result : utils::zero<owl::vec_t<float, Dim>>();
     };
 
@@ -316,7 +316,8 @@ __device__ void project_vpl_construct(
         // length 0.5 and 1 contributions.
         vpl_data_buf[0] = {
             source_point.position,
-            source_inv_pdf * dot(source_normal, source_vel + 2.f * (source_terms - solid_velocity))};
+            source_inv_pdf * dot(source_normal, source_vel + 2.f * (source_terms - solid_velocity))
+        };
 
         auto [point_x, num_intersections_x] =
             line_intersection_boundary_sample<Dim>(acc_structure, source_point, rand_state);
@@ -426,13 +427,13 @@ __device__ owl::vec_t<float, Dim> project_vpl_gather(
                 sum += multiplier * inv_pdf / divisor * (Dim * dot(r_hat, vel_diff) * r_hat - vel_diff);
             }
         }
-        return sum.sum / (config.num_volume_samples_direct * (2 * (Dim - 1) * M_PIf32));
+        return sum.sum / (config.num_volume_samples_direct * (2 * (Dim - 1) * M_PIf));
     };
 
     const auto dGdx = [&](const owl::vec_t<float, Dim> &r_vec) -> owl::vec_t<float, Dim> {
         float divisor = Dim == 2 ? owl::length(r_vec) : owl::length2(r_vec);
         divisor = max(divisor, config.dGdx_regularization);
-        owl::vec_t<float, Dim> result = owl::normalize(r_vec) / (divisor * (2 * (Dim - 1) * M_PIf32));
+        owl::vec_t<float, Dim> result = owl::normalize(r_vec) / (divisor * (2 * (Dim - 1) * M_PIf));
         return owl::isfinite(result) ? result : utils::zero<owl::vec_t<float, Dim>>();
     };
 

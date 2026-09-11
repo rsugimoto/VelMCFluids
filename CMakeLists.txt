@@ -18,9 +18,8 @@ cmake_policy(SET CMP0104 OLD) # for CUDA_ARCHITECTURES
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --extended-lambda --expt-relaxed-constexpr -std=c++17")
 set(CMAKE_CUDA_FLAGS_RELEASE "-O3 -DNDEBUG -Wall")
 
-set(OWL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/owl)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${OWL_DIR}/owl/cmake/")
-add_subdirectory(${OWL_DIR} EXCLUDE_FROM_ALL)
+set(OWL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/OWL)
+add_subdirectory(${OWL_DIR})
 
 embed_ptx(
   OUTPUT_TARGET
